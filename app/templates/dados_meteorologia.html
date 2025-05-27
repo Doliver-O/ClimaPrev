@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>ClimaPrev</title>
+</head>
+<body>
+
+
+   
+    <h1 id="titulo" style="text-align: center; color: aliceblue;">Previsão Tempo</h1>
+    
+    <div class="container">
+
+        <h1 style="color: white;">Selecione uma cidade</h1>
+
+        <label style="color: white;" for="cidades">Cidade:</label>
+        <select id="cidades" onchange="mostrarCoordenadas()">
+            <option value="">--Selecione--</option>
+            <!-- Cidades do Brasil -->
+            <option value="sao-paulo">São Paulo, Brasil</option>
+            <option value="rio-de-janeiro">Rio de Janeiro, Brasil</option>
+            <option value="brasilia">Brasília, Brasil</option>
+            <option value="salvador">Salvador, Brasil</option>
+            <option value="fortaleza">Fortaleza, Brasil</option>
+            <!-- Cidades do Mundo -->
+            <option value="nova-york">Nova York, EUA</option>
+            <option value="londres">Londres, Reino Unido</option>
+            <option value="toquio">Tóquio, Japão</option>
+            <option value="paris">Paris, França</option>
+            <option value="sydney">Sydney, Austrália</option>
+        </select>
+    
+        <button onclick="coletarDados()">Coletar Dados</button>
+
+        <script>
+        function coletarDados() {
+            const cidade = document.getElementById('cidades').value;
+        
+            if (!cidade) {
+                alert("Selecione uma cidade primeiro.");
+                return;
+            }
+        
+            fetch('/coletar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({cidade: cidade})
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Ocorreu um erro.');
+            });
+        }
+        </script>       
+    </div>
+
+
+
+    <div style="position: relative; padding: 10px; background-color: #222b3a; border-radius: 10px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);" id="background_table">
+    <div id="tabela"></div> </div>
+                
+     {% if cidade %}
+    <h1 style="text-align: center; color: aliceblue;">Previsões de Chuva para {{cidade}}</h1>
+    {% endif %}
+    
+    {% if grafico %}
+        <h2>{}</h2>
+        {{ grafico | safe }}
+    {% else %}
+        <p>Nenhuma previsão disponível.</p>
+    {% endif %}
+
+   
+
+
+
+
+
+    
+</body>
+</html>
+
+
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClimaPrev</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <style>
+
+        h1 {
+            color: #333;
+            text-align: center;
+            font-size: 3em;
+            margin: 20px 0;
+        }
+
+        .divider {
+            width: 80%;
+            border-top: 2px solid #ccc;
+            margin: 20px 0;
+        }
+
+        .message {
+            text-align: center;
+            font-size: 1.5em;
+            color: #555;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            margin-top: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Clima Prev - Open Meteo</h1>
+        <div class="divider"></div>
+        <p class="message">Eng/Dev - Diego Oliveira</p>
+    </div>
+</body>
+</html>
+{% endblock %}

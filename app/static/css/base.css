@@ -1,0 +1,345 @@
+/* Estilo geral da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #13171f; /* Cor de fundo suave */
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Estilo do link para exportação */
+/*a {
+    display: block;
+    width: 200px;
+    text-align: center;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #8a53f8;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+a:hover {
+    background-color: #2c135c;
+}
+/*
+
+/* Estilo da tabela */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #222b3a;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo das células da tabela */
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #1b202c;
+    color: white;
+}
+
+/* Estilo dos cabeçalhos da tabela */
+th {
+    background-color: #12151b;
+    color: white;
+}
+
+/* Estilo das linhas alternadas da tabela */
+tr:nth-child(even) {
+    background-color: #1b202c;
+}
+
+tr:hover {
+    background-color: #74777e0e;
+}
+
+
+
+/* UTILITIES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  a {
+    text-decoration: none;
+  }
+  li {
+    list-style: none;
+  }
+  
+  /* NAVBAR STYLING STARTS */
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #13171f;
+    color: #fff;
+  }
+  .nav-links a {
+    color: #fff;
+  }
+  /* LOGO */
+  .logo {
+    font-size: 32px;
+  }
+  /* NAVBAR MENU */
+  .menu {
+    display: flex;
+    gap: 1em;
+    font-size: 18px;
+  }
+  .menu li:hover {
+    background-color: gray;
+    border-radius: 5px;
+    transition: 0.3s ease;
+  }
+  .menu li {
+    padding: 5px 14px;
+  }
+  /* DROPDOWN MENU */
+  .services {
+    position: relative;
+  }
+  .dropdown {
+    background-color: #4334;
+    padding: 1em 0;
+    position: absolute; /*WITH RESPECT TO PARENT*/
+    display: none;
+    border-radius: 8px;
+    top: 35px;
+  }
+  .dropdown li + li {
+    margin-top: 10px;
+  }
+  .dropdown li {
+    padding: 0.5em 1em;
+    width: 8em;
+    text-align: center;
+  }
+  .dropdown li:hover {
+    background-color: #4334;
+  }
+  .services:hover .dropdown {
+    display: block;
+  }
+  
+  /*RESPONSIVE NAVBAR MENU STARTS*/
+  /* CHECKBOX HACK */
+  input[type="checkbox"] {
+    display: none;
+    top: 0;
+    transition: all 2s;
+  }
+  /*HAMBURGER MENU*/
+  .hamburger {
+    display: none;
+    font-size: 24px;
+    user-select: none;
+  }
+  /* APPLYING MEDIA QUERIES */
+  @media (max-width: 768px) {
+    .menu {
+      display: none;
+      position: absolute;
+      background-color: #4334;
+      right: 0;
+      left: 0;
+      top: 4.9rem;
+      text-align: center;
+      padding: 16px 0;
+      height: 100vh;
+      transition: 2s ease;
+    }
+    .menu li:hover {
+      display: inline-block;
+      background-color: #433354;
+      transition: 0.3s ease;
+    }
+    .menu li {
+      margin-top: 12px;
+      width: 100%;
+    }
+    input[type="checkbox"]:checked ~ .menu {
+      display: block;
+    }
+  
+    .hamburger {
+      display: block;
+    }
+    .hamburger:hover {
+      color: gray;
+      transition: color;
+      transition-delay: 200ms;
+    }
+    .dropdown {
+      left: 50%;
+      top: 30px;
+      transform: translateX(35%);
+    }
+    .dropdown li:hover {
+      background-color: #433354;
+    }
+  }
+  
+
+
+  /*LOGIN CSS*/
+$base-bgcolor: #354152;
+$base-color: #7e8ba3;
+$base-font-weight: 300;
+$base-font-size: 1rem;
+$base-line-height: 1.5;
+$base-font-family: Helvetica Neue;
+$base-font-family-fallback: sans-serif;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background-color: $base-bgcolor;
+  color: $base-color;
+  font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family, $base-font-family-fallback;
+  margin: 0;
+  min-height: 100%;
+}
+
+.align {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+
+  &__item {
+
+    &--start {
+      align-self: flex-start;
+    }
+
+    &--end {
+      align-self: flex-end;
+    }
+
+  }
+
+}
+
+.site {
+
+  &__main {
+  }
+
+  &__logo {
+    margin-bottom: 2rem;
+  }
+
+}
+
+$input-placeholder-color: #7e8ba3;
+
+input {
+  border: 0;
+  font: inherit;
+
+  &::placeholder {
+    color: $input-placeholder-color;
+  }
+
+}
+
+.form {
+
+  &__field {
+    margin-bottom: 1rem;
+  }
+
+  input {
+    outline: 0;
+    padding: .5rem 1rem;
+
+    &[type="email"],
+    &[type="password"] {
+      width: 100%;
+    }
+
+  }
+
+}
+
+$grid-max-width: 5rem;
+$grid-width: 50%;
+
+.grid {
+  margin: 0 auto;
+  max-width: $grid-max-width;
+  width: $grid-width;
+}
+
+h2 {
+  font-size: 2.75rem;
+  font-weight: 100;
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+}
+
+svg {
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+$link-color: #7e8ba3;
+
+a {
+  color: $link-color
+}
+
+.register {
+  box-shadow: 0 0 250px #000;
+  text-align: center;
+  padding: 4rem 2rem;
+
+  input {
+    border: 1px solid #242c37;
+    border-radius: 999px;
+    background-color: transparent;
+    text-align: center;
+
+    &[type="email"],
+    &[type="password"] {
+      background-repeat: no-repeat;
+      background-size: 1.5rem;
+      background-position: 1rem 50%;
+    }
+
+    &[type="email"] {
+      background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#242c37"><path d="M256.017 273.436l-205.17-170.029h410.904l-205.734 170.029zm-.034 55.462l-205.983-170.654v250.349h412v-249.94l-206.017 170.245z"/></svg>');
+    }
+
+    &[type="password"] {
+      background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#242c37"><path d="M195.334 223.333h-50v-62.666c0-61.022 49.645-110.667 110.666-110.667 61.022 0 110.667 49.645 110.667 110.667v62.666h-50v-62.666c0-33.452-27.215-60.667-60.667-60.667-33.451 0-60.666 27.215-60.666 60.667v62.666zm208.666 30v208.667h-296v-208.667h296zm-121 87.667c0-14.912-12.088-27-27-27s-27 12.088-27 27c0 7.811 3.317 14.844 8.619 19.773 4.385 4.075 6.881 9.8 6.881 15.785v22.942h23v-22.941c0-5.989 2.494-11.708 6.881-15.785 5.302-4.93 8.619-11.963 8.619-19.774z"/></svg>');
+    }
+
+    &[type="submit"] {
+      background-image: linear-gradient(160deg, #8ceabb 0%, #378f7b 100%);
+      color: #fff;
+      margin-bottom: 6rem;
+      width: 100%;
+    }
+
+  }
+
+}
+
+  
