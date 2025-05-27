@@ -7,6 +7,8 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 import joblib
 
+AWS_ACCESS_KEY = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_KEY = os.getenv('AWS_SECRET_KEY')
 
 
 def get_latest_file_key(bucket_name, prefix, s3):
@@ -43,8 +45,8 @@ def salvar_modelo_s3(model, bucket, model_key, s3):
 
 def regression():
     # Configurações AWS
-    AWS_ACCESS_KEY = 'AKIAUJH6C5GGCB35HOHY'
-    AWS_SECRET_KEY = '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'
+    AWS_ACCESS_KEY = os.getenv('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_KEY = os.getenv('AWS_SECRET_KEY')
     AWS_REGION = 'sa-east-1'  # Região São Paulo
     BUCKET_NAME = 'climaprev'
 

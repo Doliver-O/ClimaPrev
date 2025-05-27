@@ -8,12 +8,15 @@ import joblib
 import numpy as np
 from .ML_regression import regression
 from datetime import datetime, timedelta
+from dotenv import load_dotenv
+import os
 
 main = Blueprint('main', __name__)
 
 # Configurações AWS
-AWS_ACCESS_KEY = 'AKIAUJH6C5GGCB35HOHY'
-AWS_SECRET_KEY = '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'
+
+AWS_ACCESS_KEY = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_KEY = os.getenv('AWS_SECRET_KEY')
 AWS_REGION = 'sa-east-1'  # Região São Paulo
 BUCKET_NAME = 'climaprev'
 
