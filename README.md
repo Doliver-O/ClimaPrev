@@ -77,12 +77,13 @@ Esta aplicação web expõe uma API que permite interagir com os dados meteorol�
 - **Descrição**: Lista todos os arquivos armazenados em diferentes diretórios no bucket S3.
 
 - **Resposta**:
-```json
-{
-    "arquivos": ["dados_coletados/meteorologia-2022.csv", ...],
-    "arquivos2": ["dataset-final/dataset1.csv", ...],
-    "arquivos3": ["modelos/modelo_precipitacao.joblib", ...]
-}
+    ```json
+    {
+        "arquivos": ["dados_coletados/meteorologia-2022.csv", ...],
+        "arquivos2": ["dataset-final/dataset1.csv", ...],
+        "arquivos3": ["modelos/modelo_precipitacao.joblib", ...]
+    }
+    ```
 
 #### 3. Ler Arquivo
 
@@ -94,11 +95,12 @@ Esta aplicação web expõe uma API que permite interagir com os dados meteorol�
   - `arquivo` (string): Nome do arquivo a ser lido do bucket S3.
 
 - **Resposta**:
-```json
-[
-    {"date": "2025-06-09T06:00", "temperature_2m": 20, ...},
-    ...
-]
+    ```json
+    [
+        {"date": "2025-06-09T06:00", "temperature_2m": 20, ...},
+        ...
+    ]
+    ```
 
 #### 4. Fazer Previsão de Chuva
 
@@ -148,20 +150,3 @@ O fluxo do projeto pode ser dividido nas seguintes etapas principais:
    - O usuário pode solicitar previsões para outras cidades, repetindo o processo.
 
 ### Diagrama Esquemático
-
-
-[Usuário] 
-    ↓
-[Escolha da Cidade]
-    ↓
-[Coleta de Dados (API Open-Meteo)]
-    ↓
-[Armazenamento em S3]
-    ↓
-[AWS Lambda (Processamento de Dados)]
-    ↓
-[Modelo de Machine Learning Treinado]
-    ↓
-[Previsão de Precipitação]
-    ↓
-[Exibição de Gráfico](Resultados)
