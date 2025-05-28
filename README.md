@@ -150,3 +150,5 @@ O fluxo do projeto pode ser dividido nas seguintes etapas principais:
    - O usuário pode solicitar previsões para outras cidades, repetindo o processo.
 
 ### Diagrama Esquemático
+
+![Diagrama esquemático do projeto](imagens/minha_imagem.png)
