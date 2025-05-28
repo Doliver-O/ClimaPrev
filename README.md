@@ -27,7 +27,7 @@ Este projeto consiste em uma aplicação web que coleta dados meteorológicos de
 A URL base para acessar os endpoints da API é:  
 `[https://climaprev.onrender.com/]`
 
-#### Obs: No primeiro acesso existe um delay relacionado ao loading da aplicação ao servidor " instance will spin down with inactivity, which can delay requests by 50 seconds or more."
+#### Obs: No primeiro acesso existe um delay relacionado ao loading da aplicação no servidor " instance will spin down with inactivity, which can delay requests by 50 seconds or more."
 
 ## API
 
