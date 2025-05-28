@@ -10,7 +10,7 @@ from waitress import serve
 app = create_app()
 
 
-app.config['SECRET_KEY'] = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
+app.config['SECRET_KEY'] = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' #Dumb Key
 
 login_manager = LoginManager()
 login_manager.init_app(app)

@@ -6,9 +6,22 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 import joblib
+from dotenv import load_dotenv
 
+load_dotenv()
+
+        # Configurações AWS
 AWS_ACCESS_KEY = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_KEY = os.getenv('AWS_SECRET_KEY')
+AWS_REGION = 'sa-east-1'  # Região São Paulo
+
+    # Conexão com S3
+s3 = boto3.client(
+    's3',
+    aws_access_key_id=AWS_ACCESS_KEY,
+    aws_secret_access_key=AWS_SECRET_KEY,
+    region_name=AWS_REGION
+    )
 
 
 def get_latest_file_key(bucket_name, prefix, s3):
@@ -43,22 +56,7 @@ def salvar_modelo_s3(model, bucket, model_key, s3):
     s3.put_object(Bucket=bucket, Key=model_key, Body=buffer.getvalue())
     print(f"Modelo salvo em s3://{bucket}/{model_key}")
 
-def regression():
-    # Configurações AWS
-    AWS_ACCESS_KEY = os.getenv('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_KEY = os.getenv('AWS_SECRET_KEY')
-    AWS_REGION = 'sa-east-1'  # Região São Paulo
-    BUCKET_NAME = 'climaprev'
-
-    # Conexão com S3
-    s3 = boto3.client(
-    's3',
-    aws_access_key_id=AWS_ACCESS_KEY,
-    aws_secret_access_key=AWS_SECRET_KEY,
-    region_name=AWS_REGION
-    )
-
-    # Variáveis - ajuste seu bucket e prefixo dos dados
+def regression():    
     bucket = 'climaprev'
     prefix_arquivo = 'dataset-final/'
 
@@ -69,9 +67,9 @@ def regression():
     print("Carregando dados...")
     df = carregar_dados_s3(bucket, file_key, s3)
 
-    # Defina suas features e target - ajuste conforme seu dataset
-    X = df['temperature_2m', 'relative_humidity_2m', 'surface_pressure', 'pressure_msl']  # Exemplo
-    y = df['precipitation']  # Exemplo
+    # Definição de features
+    X = df[['temperature_2m', 'relative_humidity_2m', 'precipitation_probability', 'rain']]  
+    y = df[['precipitation']]  
 
     print("Dividindo dados treino e teste...")
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)

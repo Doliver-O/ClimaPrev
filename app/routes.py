@@ -6,13 +6,20 @@ import io
 from flask import Blueprint, render_template, jsonify,request,send_file, Flask
 import joblib
 import numpy as np
-from .ML_regression import regression
+from .ML_regression import regression, get_latest_file_key, carregar_dados_s3
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 import os
+import plotly.express as px
+import plotly.io as pio
 import requests
+import openmeteo_requests
+import requests_cache
+from retry_requests import retry
 
 main = Blueprint('main', __name__)
+
+load_dotenv()
 
 # Configurações AWS
 
@@ -34,9 +41,7 @@ s3 = boto3.client(
 
 # Função para coletar dados (exemplo com open-meteo)
 def coletar_dados(latitude, longitude, cidade):
-    import openmeteo_requests
-    import requests_cache
-    from retry_requests import retry
+
 
     cache_session = requests_cache.CachedSession('.cache', expire_after=3600)
     retry_session = retry(cache_session, retries=5, backoff_factor=0.2)
@@ -169,11 +174,10 @@ def carregar_modelo():
     modelo = joblib.load(io.BytesIO(bytes_modelo))
     return modelo
 
-import plotly.express as px
-import plotly.io as pio
 
-modelo = joblib.load('modelo_precipitacao.joblib')
-#modelo = carregar_modelo()
+
+#modelo = joblib.load('modelo_precipitacao.joblib')
+
 
 '''
 @main.route('/predict', methods=['POST'])
@@ -197,9 +201,14 @@ def predict():
     return render_template('dados_meteorologia.html', pred=pred, grafico=grafico)
 '''
 
-def fazer_previsao(data_csv='app\meteorologia_2025-05-26_22-35-45_sao-paulo.csv'):
-    # Carregar os dados do CSV
-    df = pd.read_csv(data_csv, parse_dates=['date'])
+
+
+
+def fazer_previsao():
+    key_s3 = get_latest_file_key(BUCKET,'dataset-final',s3)
+    obj = s3.get_object(Bucket=BUCKET, Key=key_s3)
+    # Carregar os dados do CSV direto ao pandas
+    df = pd.read_csv(io.BytesIO(obj['Body'].read()), parse_dates=['date'])
     
     # Obter a data de amanhã
     tomorrow = datetime.now() + timedelta(days=1)
@@ -209,10 +218,11 @@ def fazer_previsao(data_csv='app\meteorologia_2025-05-26_22-35-45_sao-paulo.csv'
     df_tomorrow = df[df['date'].dt.date == tomorrow.date()]
 
     # Selecionar as features
-    features = df_tomorrow[['temperature_2m', 'relative_humidity_2m', 'visibility']]
+    features = df_tomorrow[['temperature_2m', 'relative_humidity_2m', 'precipitation_probability', 'rain']]
     cidade = df_tomorrow['cidade'].iloc[0].replace("-"," ").upper().replace(".CSV","")
     print(cidade)
     
+    modelo = carregar_modelo()
     # Fazer a previsão
     previsoes = modelo.predict(features)
 
@@ -231,6 +241,12 @@ def predict():
 
     # Plotar as previsões
     fig = px.line(df_previsao2, x='date', y='previsão_chuva', title='Previsão de Chuva para Amanhã')
+    fig.update_layout(
+    xaxis_title='Horas',
+    yaxis_title='Precipitação (mm)')
+
+    #fig.update_xaxes(tickmode='linear', dtick='24')
+
     grafico = pio.to_html(fig, full_html=False)
 
     return render_template('dados_meteorologia.html', grafico=grafico, cidade=cidade)
