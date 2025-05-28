@@ -202,7 +202,7 @@ def fazer_previsao():
 
     return df_tomorrow, cidade
 
-@main.route('/predict', methods=['GET'])
+@main.route('/predict')
 def predict():
         # Fazer previsões e obter o DataFrame
     df_previsao = fazer_previsao()
@@ -220,6 +220,6 @@ def predict():
 
     grafico = pio.to_html(fig, full_html=False)
 
-    return render_template('dados_meteorologia.html', grafico=grafico, cidade=cidade)
+    return render_template('predict.html', grafico=grafico, cidade=cidade)
 
 
