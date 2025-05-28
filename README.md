@@ -23,22 +23,6 @@ Este projeto consiste em uma aplicação web que coleta dados meteorológicos de
 - Fazer previsões de precipitação para o dia seguinte.
 - Exibir os resultados em um gráfico interativo.
 
-## Estrutura do Projeto
-/ClimaPrev
-├── app/
-    └── static/
-        └── base.css
-    └── templates/
-        └── base.html
-        └── dados_metereologia.html
-        └── index.html
-    └── ML_regression.py
-    └── routes.py
-    └── __init__.py
-├── app.py                
-├── config.py
-├── models.py
-
 ## API
 
 Esta aplicação web expõe uma API que permite interagir com os dados meteorológicos e fazer previsões de precipitação. A seguir estão os endpoints disponíveis.
@@ -93,12 +77,13 @@ Esta aplicação web expõe uma API que permite interagir com os dados meteorol�
 - **Descrição**: Lista todos os arquivos armazenados em diferentes diretórios no bucket S3.
 
 - **Resposta**:
-```json
-{
-    "arquivos": ["dados_coletados/meteorologia-2022.csv", ...],
-    "arquivos2": ["dataset-final/dataset1.csv", ...],
-    "arquivos3": ["modelos/modelo_precipitacao.joblib", ...]
-}
+    ```json
+    {
+        "arquivos": ["dados_coletados/meteorologia-2022.csv", ...],
+        "arquivos2": ["dataset-final/dataset1.csv", ...],
+        "arquivos3": ["modelos/modelo_precipitacao.joblib", ...]
+    }
+    ```
 
 #### 3. Ler Arquivo
 
@@ -110,11 +95,12 @@ Esta aplicação web expõe uma API que permite interagir com os dados meteorol�
   - `arquivo` (string): Nome do arquivo a ser lido do bucket S3.
 
 - **Resposta**:
-```json
-[
-    {"date": "2025-06-09T06:00", "temperature_2m": 20, ...},
-    ...
-]
+    ```json
+    [
+        {"date": "2025-06-09T06:00", "temperature_2m": 20, ...},
+        ...
+    ]
+    ```
 
 #### 4. Fazer Previsão de Chuva
 
@@ -165,19 +151,4 @@ O fluxo do projeto pode ser dividido nas seguintes etapas principais:
 
 ### Diagrama Esquemático
 
-```plaintext
-[Usuário] 
-    ↓
-[Escolha da Cidade]
-    ↓
-[Coleta de Dados (API Open-Meteo)]
-    ↓
-[Armazenamento em S3]
-    ↓
-[AWS Lambda (Processamento de Dados)]
-    ↓
-[Modelo de Machine Learning Treinado]
-    ↓
-[Previsão de Precipitação]
-    ↓
-[Exibição de Gráfico](Resultados)
+![Diagrama esquemático do projeto](image.png)
