@@ -1,4 +1,4 @@
-# Previsão de Precipitação em Tempo Real
+# Previsão de Precipitação
 
 ## Descrição do Projeto
 
