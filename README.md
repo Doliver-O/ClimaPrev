@@ -151,4 +151,4 @@ O fluxo do projeto pode ser dividido nas seguintes etapas principais:
 
 ### Diagrama Esquemático
 
-![Diagrama esquemático do projeto](imagem.png)
+![Diagrama esquemático do projeto](image.png)
