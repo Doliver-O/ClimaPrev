@@ -27,6 +27,12 @@ Este projeto consiste em uma aplicação web que coleta dados meteorológicos de
 
 Esta aplicação web expõe uma API que permite interagir com os dados meteorológicos e fazer previsões de precipitação. A seguir estão os endpoints disponíveis.
 
+## URL Base
+A URL base para acessar os endpoints da API é:  
+`[https://embrapawineml.onrender.com](https://climaprev.onrender.com/)`
+
+obs: No primeiro acesso existe um delay relacionado ao loading da aplicação ao servidor " instance will spin down with inactivity, which can delay requests by 50 seconds or more."
+
 ### Endpoints
 
 #### 1. Coletar Dados Meteorológicos
