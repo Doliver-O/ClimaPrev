@@ -10,6 +10,7 @@ from .ML_regression import regression
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 import os
+import requests
 
 main = Blueprint('main', __name__)
 
@@ -53,6 +54,9 @@ def coletar_dados(latitude, longitude, cidade):
         "paste_days": 55,
         "forecast_days": 7 
     }
+
+    # Chamando a API com `verify=False` para contornar problemas de SSL
+    #response = requests.get(url, params=params, verify=False)
 
     responses = openmeteo.weather_api(url, params=params)
     response = responses[0]
@@ -133,6 +137,7 @@ def coletar():
     salvar_s3(df, nome_arquivo)
 
     regression()
+    predict()
     
     return jsonify({'message': f'Dados coletados e salvos para {cidade} com sucesso!', 'linhas': len(df)})
 
