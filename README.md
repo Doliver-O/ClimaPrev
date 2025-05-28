@@ -23,22 +23,6 @@ Este projeto consiste em uma aplicação web que coleta dados meteorológicos de
 - Fazer previsões de precipitação para o dia seguinte.
 - Exibir os resultados em um gráfico interativo.
 
-## Estrutura do Projeto
-/ClimaPrev
-├── app/
-    └── static/
-        └── base.css
-    └── templates/
-        └── base.html
-        └── dados_metereologia.html
-        └── index.html
-    └── ML_regression.py
-    └── routes.py
-    └── __init__.py
-├── app.py                
-├── config.py
-├── models.py
-
 ## API
 
 Esta aplicação web expõe uma API que permite interagir com os dados meteorológicos e fazer previsões de precipitação. A seguir estão os endpoints disponíveis.
@@ -165,7 +149,7 @@ O fluxo do projeto pode ser dividido nas seguintes etapas principais:
 
 ### Diagrama Esquemático
 
-```plaintext
+
 [Usuário] 
     ↓
 [Escolha da Cidade]
