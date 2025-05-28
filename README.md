@@ -23,15 +23,15 @@ Este projeto consiste em uma aplicação web que coleta dados meteorológicos de
 - Fazer previsões de precipitação para o dia seguinte.
 - Exibir os resultados em um gráfico interativo.
 
-## API
-
-Esta aplicação web expõe uma API que permite interagir com os dados meteorológicos e fazer previsões de precipitação. A seguir estão os endpoints disponíveis.
-
 ## URL Base
 A URL base para acessar os endpoints da API é:  
 `[https://climaprev.onrender.com/]`
 
-### Obs: No primeiro acesso existe um delay relacionado ao loading da aplicação ao servidor " instance will spin down with inactivity, which can delay requests by 50 seconds or more."
+#### Obs: No primeiro acesso existe um delay relacionado ao loading da aplicação ao servidor " instance will spin down with inactivity, which can delay requests by 50 seconds or more."
+
+## API
+
+Esta aplicação web expõe uma API que permite interagir com os dados meteorológicos e fazer previsões de precipitação. A seguir estão os endpoints disponíveis.
 
 ### Endpoints
 
