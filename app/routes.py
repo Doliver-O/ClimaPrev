@@ -142,7 +142,6 @@ def coletar():
     salvar_s3(df, nome_arquivo)
 
     regression()
-    predict()
     
     return jsonify({'message': f'Dados coletados e salvos para {cidade} com sucesso!', 'linhas': len(df)})
 
@@ -176,34 +175,6 @@ def carregar_modelo():
 
 
 
-#modelo = joblib.load('modelo_precipitacao.joblib')
-
-
-'''
-@main.route('/predict', methods=['POST'])
-def predict():
-    # Obter os dados do formulário
-    dados = request.form.to_dict()
-    # Converter para DataFrame
-    #features = modelo.feature_names_in_
-    #print(features)
-    df_input = pd.DataFrame(dados, index=[0])
-    
-    
-    # Fazer a previsão
-    pred = modelo.predict(df_input)
-    print(dados)
-
-
-    # Aqui você poderá criar gráficos ou métricas a partir da predição
-    grafico = criar_grafico(df_input, pred)
-    
-    return render_template('dados_meteorologia.html', pred=pred, grafico=grafico)
-'''
-
-
-
-
 def fazer_previsao():
     key_s3 = get_latest_file_key(BUCKET,'dataset-final',s3)
     obj = s3.get_object(Bucket=BUCKET, Key=key_s3)
@@ -231,7 +202,7 @@ def fazer_previsao():
 
     return df_tomorrow, cidade
 
-@main.route('/predict')
+@main.route('/predict', methods=['GET'])
 def predict():
         # Fazer previsões e obter o DataFrame
     df_previsao = fazer_previsao()

@@ -36,7 +36,7 @@
             <option value="sydney">Sydney, Austrália</option>
         </select>
     
-        <button onclick="coletarDados()">Coletar Dados</button>
+        <button onclick="coletarDados()">Previsão</button>
 
         <script>
         function coletarDados() {
@@ -57,6 +57,8 @@
             .then(response => response.json())
             .then(data => {
                 alert(data.message);
+
+                return fetch('/predict');
             })
             .catch(error => {
                 console.error('Erro:', error);
